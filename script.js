@@ -85,74 +85,44 @@ function generatePassword(){
   // prompt for special characters
   var special = confirm("Include special characters?");
 
+  // error if no parameters are selected
   if (!lowerCase && !upperCase && !number && !special){
     alert("Error: You must choose atleast one parameter");
     return "No parameters selected.";
   }
 
-/*
-  for (var i = 0; i < passwordObject.passwordLength; i++){
-    var rnd = Math.floor(Math.random() * passwordObject.lowerCase.length);
-    newPassword.push(passwordObject.lowerCase[rnd]);
-
-    var rnd = Math.floor(Math.random() * passwordObject.upperCase.length);
-    newPassword.push(passwordObject.upperCase[rnd]);
-
-    var rnd = Math.floor(Math.random() * passwordObject.number.length);
-    newPassword.push(passwordObject.number[rnd]);
-
-    var rnd = Math.floor(Math.random() * passwordObject.special.length);
-    newPassword.push(passwordObject.special[rnd]);
+  // Test each option and add possible characters to newPasswordCharacter array
+  if(lowerCase){
+    for(var i = 0; i < passwordObject.lowerCase.length; i++){
+      newPasswordCharacters.push(passwordObject.lowerCase[i])
+    }
   }
-  console.log(Object.keys(passwordObject)[0]);
-  return newPassword;
-  */
 
-if(lowerCase){
-  for(var i = 0; i < passwordObject.lowerCase.length; i++){
-    newPasswordCharacters.push(passwordObject.lowerCase[i])
+  if(upperCase){
+    for(var i = 0; i < passwordObject.upperCase.length; i++){
+      newPasswordCharacters.push(passwordObject.upperCase[i])
+    }
   }
-}
 
-if(upperCase){
-  for(var i = 0; i < passwordObject.upperCase.length; i++){
-    newPasswordCharacters.push(passwordObject.upperCase[i])
+  if(number){
+    for(var i = 0; i < passwordObject.number.length; i++){
+      newPasswordCharacters.push(passwordObject.number[i])
+    }
   }
-}
 
-if(number){
-  for(var i = 0; i < passwordObject.number.length; i++){
-    newPasswordCharacters.push(passwordObject.number[i])
+  if(special){
+    for(var i = 0; i < passwordObject.special.length; i++){
+      newPasswordCharacters.push(passwordObject.special[i])
+    }
   }
-}
 
-if(special){
-  for(var i = 0; i < passwordObject.special.length; i++){
-    newPasswordCharacters.push(passwordObject.special[i])
-  }
-}
-
-console.log(newPasswordCharacters);
-
+// Randomly choose possible characters from newPasswordCharacters array
 for (var i = 0; i < passwordObject.passwordLength; i++){
   var rnd = Math.floor(Math.random() * newPasswordCharacters.length);
-  console.log(passwordObject.passwordLength);
   newPassword.push(newPasswordCharacters[rnd]);
 }
 
+// Combined newPassword randomized array into one string
 return newPassword.join("");
-// END FUNCTION
-}
 
-/*
-WHEN prompted for the length of the password
-THEN I choose a length of at least 8 characters and no more than 128 characters
-WHEN prompted for character types to include in the password
-THEN I choose lowercase, uppercase, numeric, and/or special characters
-WHEN I answer each prompt
-THEN my input should be validated and at least one character type should be selected
-WHEN all prompts are answered
-THEN a password is generated that matches the selected criteria
-WHEN the password is generated
-THEN the password is either displayed in an alert or written to the page
-*/
+}
