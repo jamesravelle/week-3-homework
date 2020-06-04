@@ -22,7 +22,7 @@ var passwordObject = {
   upperCase: [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
   ],
-  numbers: [
+  number: [
     '1','2','3','4','5','6','7','8','9'
   ],
   special: [
@@ -61,16 +61,16 @@ var passwordObject = {
     '~'
   ]
 }
-console.log(passwordObject.special[2]);
-
 
 
 
 function generatePassword(){
+  var newPasswordCharacters = [];
+  var newPassword = [];
+  passwordObject.passwordLength = NaN;
   // Get length, must be between 8 and 128 characters and must not be a number/not empty/not skipped
-  while(isNaN(length) || length < 8 || length > 128){
-    var length = parseInt(prompt("Please enter the length of the password. It must be a number from 8 to 128", ""));
-    console.log(length);
+  while(isNaN(passwordObject.passwordLength) || passwordObject.passwordLength < 8 || passwordObject.passwordLength > 128){
+    passwordObject.passwordLength = parseInt(prompt("Please enter the length of the password. It must be a number from 8 to 128", ""));
   };
 
   // prompt for lower case
@@ -80,15 +80,68 @@ function generatePassword(){
   var upperCase = confirm("Include upper case characters?");
 
   // prompt for numeric
-  var numeric = confirm("Include numeric characters?");
+  var number = confirm("Include numeric characters?");
 
   // prompt for special characters
   var special = confirm("Include special characters?");
 
+  if (!lowerCase && !upperCase && !number && !special){
+    alert("Error: You must choose atleast one parameter");
+    return "No parameters selected.";
+  }
 
-  var combine = length + " " + lowerCase + " " + upperCase + " " + numeric + " " + special;
-  
-  return combine;
+/*
+  for (var i = 0; i < passwordObject.passwordLength; i++){
+    var rnd = Math.floor(Math.random() * passwordObject.lowerCase.length);
+    newPassword.push(passwordObject.lowerCase[rnd]);
+
+    var rnd = Math.floor(Math.random() * passwordObject.upperCase.length);
+    newPassword.push(passwordObject.upperCase[rnd]);
+
+    var rnd = Math.floor(Math.random() * passwordObject.number.length);
+    newPassword.push(passwordObject.number[rnd]);
+
+    var rnd = Math.floor(Math.random() * passwordObject.special.length);
+    newPassword.push(passwordObject.special[rnd]);
+  }
+  console.log(Object.keys(passwordObject)[0]);
+  return newPassword;
+  */
+
+if(lowerCase){
+  for(var i = 0; i < passwordObject.lowerCase.length; i++){
+    newPasswordCharacters.push(passwordObject.lowerCase[i])
+  }
+}
+
+if(upperCase){
+  for(var i = 0; i < passwordObject.upperCase.length; i++){
+    newPasswordCharacters.push(passwordObject.upperCase[i])
+  }
+}
+
+if(number){
+  for(var i = 0; i < passwordObject.number.length; i++){
+    newPasswordCharacters.push(passwordObject.number[i])
+  }
+}
+
+if(special){
+  for(var i = 0; i < passwordObject.special.length; i++){
+    newPasswordCharacters.push(passwordObject.special[i])
+  }
+}
+
+console.log(newPasswordCharacters);
+
+for (var i = 0; i < passwordObject.passwordLength; i++){
+  var rnd = Math.floor(Math.random() * newPasswordCharacters.length);
+  console.log(passwordObject.passwordLength);
+  newPassword.push(newPasswordCharacters[rnd]);
+}
+
+return newPassword.join("");
+// END FUNCTION
 }
 
 /*
