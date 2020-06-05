@@ -11,9 +11,8 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-var length = 5;
 
-// create object with all parameters
+// create object with all character options
 var passwordObject = {
   passwordLength : length,
   lowerCase: [
@@ -61,8 +60,6 @@ var passwordObject = {
     '~'
   ]
 }
-
-
 
 function generatePassword(){
   var newPasswordCharacters = [];
