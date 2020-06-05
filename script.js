@@ -68,6 +68,14 @@ function generatePassword(){
   // Get length, must be between 8 and 128 characters and must not be a number/not empty/not skipped
   while(isNaN(passwordObject.passwordLength) || passwordObject.passwordLength < 8 || passwordObject.passwordLength > 128){
     passwordObject.passwordLength = parseInt(prompt("Please enter the length of the password. It must be a number from 8 to 128", ""));
+    // Provide errors
+    if(isNaN(passwordObject.passwordLength)){
+      alert('Error: You must enter a number for length');
+    } else if(passwordObject.passwordLength < 8){
+      alert('Error: Length must be longer than 8 characters');
+    } else if(passwordObject.passwordLength > 128){
+      alert('Error: Length must be less than 128 characters');
+    }
   };
 
   // prompt for lower case
