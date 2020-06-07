@@ -62,9 +62,11 @@ var passwordObject = {
 }
 
 function generatePassword(){
+  // Reset strings to empty
   var newPasswordCharacters = [];
   var newPassword = [];
   passwordObject.passwordLength = NaN;
+
   // Get length, must be between 8 and 128 characters and must not be a number/not empty/not skipped
   while(isNaN(passwordObject.passwordLength) || passwordObject.passwordLength < 8 || passwordObject.passwordLength > 128){
     passwordObject.passwordLength = parseInt(prompt("Please enter the length of the password. It must be a number from 8 to 128", ""));
@@ -98,27 +100,19 @@ function generatePassword(){
 
   // Test each option and add possible characters to newPasswordCharacter array
   if(lowerCase){
-    for(var i = 0; i < passwordObject.lowerCase.length; i++){
-      newPasswordCharacters.push(passwordObject.lowerCase[i])
-    }
+    newPasswordCharacters = newPasswordCharacters.concat(passwordObject.lowerCase);
   }
 
   if(upperCase){
-    for(var i = 0; i < passwordObject.upperCase.length; i++){
-      newPasswordCharacters.push(passwordObject.upperCase[i])
-    }
+    newPasswordCharacters = newPasswordCharacters.concat(passwordObject.upperCase);
   }
 
   if(number){
-    for(var i = 0; i < passwordObject.number.length; i++){
-      newPasswordCharacters.push(passwordObject.number[i])
-    }
+    newPasswordCharacters = newPasswordCharacters.concat(passwordObject.number);
   }
 
   if(special){
-    for(var i = 0; i < passwordObject.special.length; i++){
-      newPasswordCharacters.push(passwordObject.special[i])
-    }
+    newPasswordCharacters = newPasswordCharacters.concat(passwordObject.special);
   }
 
 // Randomly choose possible characters from newPasswordCharacters array
